@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "561477281761",
+    "project_id": "chatapp-3d98b",
+    "storage_bucket": "chatapp-3d98b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561477281761:android:4bbe226d211daf2c6b14a0",
+        "android_client_info": {
+          "package_name": "com.edsonlimadev.chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL3t_wHcPcU4wlUQkGV_OygOcetQt8F10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
