@@ -68,6 +68,7 @@ class AccountActivity : AppCompatActivity() {
             binding.textInputEmailSignUp.error = "E-mail é obrigatório"
             return false
         } else if (email.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.textInputNameSignUp.error = null
             binding.textInputEmailSignUp.error = "E-mail não é válido"
             return false
         } else if (password.isEmpty()) {
@@ -75,6 +76,7 @@ class AccountActivity : AppCompatActivity() {
             binding.textInputPasswordSignUp.error = "Senha é obrigatória"
             return false
         } else if (password.isNotEmpty() && password.length < 6) {
+            binding.textInputEmailSignUp.error = null
             binding.textInputPasswordSignUp.error = "Senha deve conter no minino 6 caracteres"
             return false
         } else {
