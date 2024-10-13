@@ -45,6 +45,7 @@ class AccountActivity : AppCompatActivity() {
             insets
         }
 
+        initializeToolBar()
 
         binding.btnSignUp.setOnClickListener {
 
@@ -56,6 +57,15 @@ class AccountActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private fun initializeToolBar() {
+        val toolbar = binding.includeSignUpTb.tbMain
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            title = ""
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     private fun validate(): Boolean {

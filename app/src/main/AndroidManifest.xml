@@ -20,6 +20,7 @@
             android:exported="false" />
         <activity
             android:name=".AccountActivity"
+            android:parentActivityName=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

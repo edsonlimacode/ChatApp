@@ -46,6 +46,10 @@ class LoginActivity : AppCompatActivity() {
 
             if(validate()) siginIn(email, password)
         }
+
+        binding.textNewAccount.setOnClickListener {
+            startActivity(Intent(this, AccountActivity::class.java))
+        }
     }
 
     private fun siginIn(email: String, password: String) {
