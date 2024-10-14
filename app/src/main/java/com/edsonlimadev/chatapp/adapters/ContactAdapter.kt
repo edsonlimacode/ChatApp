@@ -8,7 +8,9 @@ import com.edsonlimadev.chatapp.databinding.ItemContactsBinding
 import com.edsonlimadev.chatapp.model.User
 import com.squareup.picasso.Picasso
 
-class ContactAdapter : Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter(
+    private val onClick: () -> Unit
+) : Adapter<ContactAdapter.ContactViewHolder>() {
 
     private var contactsList = emptyList<User>()
 
@@ -28,6 +30,12 @@ class ContactAdapter : Adapter<ContactAdapter.ContactViewHolder>() {
             }
 
             binding.textContact.text = user.name
+
+
+            binding.clItemContact.setOnClickListener {
+                onClick()
+            }
+
         }
 
     }

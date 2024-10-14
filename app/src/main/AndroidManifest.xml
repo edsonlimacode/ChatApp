@@ -13,6 +13,11 @@
         android:theme="@style/Theme.ChatApp"
         tools:targetApi="31">
         <activity
+            android:name=".MessagesActivity"
+            android:parentActivityName=".HomeActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
@@ -20,8 +25,8 @@
             android:exported="false" />
         <activity
             android:name=".AccountActivity"
-            android:parentActivityName=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
