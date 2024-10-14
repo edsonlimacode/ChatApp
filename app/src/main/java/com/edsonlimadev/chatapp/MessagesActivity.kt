@@ -2,7 +2,6 @@ package com.edsonlimadev.chatapp
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.edsonlimadev.chatapp.adapters.MessageAdapter
 import com.edsonlimadev.chatapp.constants.Constants
 import com.edsonlimadev.chatapp.databinding.ActivityMessagesBinding
+import com.edsonlimadev.chatapp.model.Conversation
 import com.edsonlimadev.chatapp.model.Message
 import com.edsonlimadev.chatapp.model.User
 import com.edsonlimadev.whatappclone.extensions.message
@@ -88,7 +88,28 @@ class MessagesActivity : AppCompatActivity() {
 
                 if (textMessage.isNotEmpty()) {
                     saveMessage(userSender!!.id, userReceiver!!.id, message)
+
+                    val senderConversation = Conversation(
+                        userSender!!.id,
+                        userReceiver!!.id,
+                        userReceiver!!.avatar,
+                        userReceiver!!.name,
+                        textMessage
+                    )
+
+                    saveConversation(senderConversation)
+
                     saveMessage(userReceiver!!.id, userSender!!.id, message)
+
+                    val receiverConversation = Conversation(
+                        userReceiver!!.id,
+                        userSender!!.id,
+                        userSender!!.avatar,
+                        userSender!!.name,
+                        textMessage
+                    )
+
+                    saveConversation(receiverConversation)
                 }
 
                 binding.textEditMessage.setText("")
@@ -96,6 +117,18 @@ class MessagesActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private fun saveConversation(conversation: Conversation) {
+
+        db.collection(Constants.CONVERSATIONS_COLLECTION)
+            .document(conversation.userSenderId)
+            .collection(Constants.LAST_MESSAGE_COLLECTION)
+            .document(conversation.userReceiverId)
+            .set(conversation)
+            .addOnFailureListener {
+                message("Erro ao tentar salvar a conversa")
+            }
     }
 
     private fun initializeRecyclerView() {
@@ -130,12 +163,12 @@ class MessagesActivity : AppCompatActivity() {
                     documents?.forEach { documentSnapshot ->
 
                         val message = documentSnapshot.toObject(Message::class.java)
-                        if (message != null){
+                        if (message != null) {
                             messagesList.add(message)
                         }
                     }
 
-                    if(messagesList.isNotEmpty()){
+                    if (messagesList.isNotEmpty()) {
                         messageAdapter.setMessages(messagesList)
                     }
                 }

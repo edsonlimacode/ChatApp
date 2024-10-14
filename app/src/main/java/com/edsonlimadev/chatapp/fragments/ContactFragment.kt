@@ -15,12 +15,15 @@ import com.edsonlimadev.chatapp.databinding.FragmentContactBinding
 import com.edsonlimadev.chatapp.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
 class ContactFragment : Fragment() {
 
     private lateinit var binding: FragmentContactBinding
 
     private lateinit var contactAdapter: ContactAdapter
+
+    private lateinit var listenerRegistration: ListenerRegistration
 
     private val auth by lazy {
         FirebaseAuth.getInstance()
@@ -70,7 +73,7 @@ class ContactFragment : Fragment() {
 
         if (userLogged != null) {
 
-            db.collection(Constants.USERS_COLLECTION)
+            listenerRegistration = db.collection(Constants.USERS_COLLECTION)
                 .addSnapshotListener { querySnapshot, _ ->
 
                     val documents = querySnapshot?.documents
@@ -91,6 +94,11 @@ class ContactFragment : Fragment() {
                     }
                 }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        listenerRegistration.remove()
     }
 
 }
