@@ -1,5 +1,6 @@
 package com.edsonlimadev.chatapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.edsonlimadev.chatapp.MessagesActivity
 import com.edsonlimadev.chatapp.adapters.ConversationAdapter
 import com.edsonlimadev.chatapp.constants.Constants
 import com.edsonlimadev.chatapp.databinding.FragmentConversationBinding
 import com.edsonlimadev.chatapp.model.Conversation
+import com.edsonlimadev.chatapp.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -48,7 +51,21 @@ class ConversationFragment : Fragment() {
             false
         )
 
-        conversationAdapter = ConversationAdapter()
+        conversationAdapter = ConversationAdapter{ conversation ->
+
+            val intent = Intent(context, MessagesActivity::class.java)
+
+            val user = User(
+                conversation.userReceiverId,
+                conversation.receiverName,
+                "",
+                conversation.avatarReceiver
+            )
+
+            intent.putExtra("userReceiver", user)
+
+            startActivity(intent)
+        }
 
         binding.rvConversations.adapter = conversationAdapter
         binding.rvConversations.layoutManager = LinearLayoutManager(context)

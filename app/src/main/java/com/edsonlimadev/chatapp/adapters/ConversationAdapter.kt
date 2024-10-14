@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.edsonlimadev.chatapp.databinding.ItemConversationBinding
 import com.edsonlimadev.chatapp.model.Conversation
+import com.edsonlimadev.chatapp.model.User
 import com.squareup.picasso.Picasso
 
-class ConversationAdapter : Adapter<ConversationAdapter.ConversationViewHolder>() {
+class ConversationAdapter(
+    private val onClick: (Conversation) -> Unit
+) : Adapter<ConversationAdapter.ConversationViewHolder>() {
 
     private var conversationList = emptyList<Conversation>()
 
@@ -31,6 +34,10 @@ class ConversationAdapter : Adapter<ConversationAdapter.ConversationViewHolder>(
 
             binding.textNameConversation.text = conversation.receiverName
             binding.textLastMessage.text = conversation.message
+
+            binding.clConversation.setOnClickListener {
+                onClick(conversation)
+            }
         }
 
     }
