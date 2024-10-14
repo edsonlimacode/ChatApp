@@ -46,8 +46,12 @@ class ContactFragment : Fragment() {
             false
         )
 
-        contactAdapter = ContactAdapter {
-            startActivity(Intent(context, MessagesActivity::class.java))
+        contactAdapter = ContactAdapter { user ->
+
+            val intent = Intent(context, MessagesActivity::class.java)
+
+            intent.putExtra("userReceiver", user)
+            startActivity(intent)
         }
 
         binding.rvContacts.adapter = contactAdapter

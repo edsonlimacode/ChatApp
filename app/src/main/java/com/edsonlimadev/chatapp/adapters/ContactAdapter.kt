@@ -9,7 +9,7 @@ import com.edsonlimadev.chatapp.model.User
 import com.squareup.picasso.Picasso
 
 class ContactAdapter(
-    private val onClick: () -> Unit
+    private val onClick: (User) -> Unit
 ) : Adapter<ContactAdapter.ContactViewHolder>() {
 
     private var contactsList = emptyList<User>()
@@ -33,7 +33,7 @@ class ContactAdapter(
 
 
             binding.clItemContact.setOnClickListener {
-                onClick()
+                onClick(user)
             }
 
         }
