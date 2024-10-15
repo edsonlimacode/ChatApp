@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.edsonlimadev.chatapp.MessagesActivity
+import com.edsonlimadev.chatapp.R
 import com.edsonlimadev.chatapp.adapters.ConversationAdapter
 import com.edsonlimadev.chatapp.constants.Constants
 import com.edsonlimadev.chatapp.databinding.FragmentConversationBinding
@@ -69,9 +71,16 @@ class ConversationFragment : Fragment() {
 
         binding.rvConversations.adapter = conversationAdapter
         binding.rvConversations.layoutManager = LinearLayoutManager(context)
-        binding.rvConversations.addItemDecoration(
-            DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
-        )
+
+        val dividerDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.custom_divider)
+
+        val itemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+
+        dividerDrawable?.let {
+            itemDecoration.setDrawable(it)
+        }
+
+        binding.rvConversations.addItemDecoration(itemDecoration)
 
         return binding.root
     }

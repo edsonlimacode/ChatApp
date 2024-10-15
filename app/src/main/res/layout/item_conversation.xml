@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="Nome"
-        android:textColor="@color/gray_600"
-        android:textSize="16sp"
+        android:textColor="#fff"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/imgConversation"
         app:layout_constraintStart_toEndOf="@+id/imgConversation"
         app:layout_constraintTop_toTopOf="@+id/imgConversation"
@@ -35,7 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Olá, pizza ?"
-        android:textColor="@color/gray_700"
+        android:textColor="@color/gray_600"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textNameConversation"
         app:layout_constraintTop_toBottomOf="@+id/textNameConversation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

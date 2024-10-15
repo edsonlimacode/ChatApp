@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Nome"
-        android:textColor="@color/gray_600"
+        android:textColor="#fff"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imgContact"
         app:layout_constraintStart_toEndOf="@+id/imgContact"

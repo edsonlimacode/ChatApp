@@ -31,7 +31,7 @@
         app:tabIndicatorColor="@color/green_500"
         app:tabSelectedTextColor="@color/green_500"
         app:tabTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:tabTextColor="@color/gray_600">
+        app:tabTextColor="@color/gray_500">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
