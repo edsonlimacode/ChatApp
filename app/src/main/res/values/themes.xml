@@ -12,6 +12,9 @@
 
     <style name="Theme.ChatApp" parent="Base.Theme.ChatApp" />
 
+    <style name="RoundedImageCorner">
+        <item name="cornerSize">50%</item>
+    </style>
 
     <style name="ActionOverflow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="tint">@color/green_500</item>

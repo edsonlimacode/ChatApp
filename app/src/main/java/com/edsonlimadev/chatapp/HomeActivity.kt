@@ -72,7 +72,9 @@ class HomeActivity : AppCompatActivity() {
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     when(menuItem.itemId){
-                        R.id.menuItemPerfil -> {}
+                        R.id.menuItemPerfil -> {
+                            startActivity(Intent(applicationContext, ProfileActivity::class.java))
+                        }
                         R.id.menuItemLogout -> {
                             auth.signOut()
                             startActivity(Intent(applicationContext, MainActivity::class.java))
