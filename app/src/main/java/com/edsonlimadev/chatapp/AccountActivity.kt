@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.edsonlimadev.chatapp.constants.Constants
@@ -45,6 +46,9 @@ class AccountActivity : AppCompatActivity() {
             insets
         }
 
+        window.statusBarColor = ContextCompat.getColor(this, R.color.dark_900)
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.dark_900)
+
         initializeToolBar()
 
         binding.btnSignUp.setOnClickListener {
@@ -71,26 +75,26 @@ class AccountActivity : AppCompatActivity() {
     private fun validate(): Boolean {
 
         if (name.isEmpty()) {
-            binding.textInputNameSignUp.error = "Nome é obrigatório"
+            binding.textEditNameSignUp.error = "Nome é obrigatório"
             return false
         } else if (email.isEmpty()) {
-            binding.textInputNameSignUp.error = null
-            binding.textInputEmailSignUp.error = "E-mail é obrigatório"
+            binding.textEditNameSignUp.error = null
+            binding.textEditEmailSignUp.error = "E-mail é obrigatório"
             return false
         } else if (email.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.textInputNameSignUp.error = null
-            binding.textInputEmailSignUp.error = "E-mail não é válido"
+            binding.textEditNameSignUp.error = null
+            binding.textEditEmailSignUp.error = "E-mail não é válido"
             return false
         } else if (password.isEmpty()) {
-            binding.textInputEmailSignUp.error = null
-            binding.textInputPasswordSignUp.error = "Senha é obrigatória"
+            binding.textEditEmailSignUp.error = null
+            binding.textEditPasswordSignUp.error = "Senha é obrigatória"
             return false
         } else if (password.isNotEmpty() && password.length < 6) {
-            binding.textInputEmailSignUp.error = null
-            binding.textInputPasswordSignUp.error = "Senha deve conter no minino 6 caracteres"
+            binding.textEditEmailSignUp.error = null
+            binding.textEditPasswordSignUp.error = "Senha deve conter no minino 6 caracteres"
             return false
         } else {
-            binding.textInputPasswordSignUp.error = null
+            binding.textEditPasswordSignUp.error = null
             return true
         }
 

@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
+import com.squareup.picasso.Picasso
 
 class MessagesActivity : AppCompatActivity() {
 
@@ -64,11 +65,10 @@ class MessagesActivity : AppCompatActivity() {
             insets
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            window.apply {
-                statusBarColor = ContextCompat.getColor(applicationContext, R.color.dark_900)
-            }
-        }
+
+        window.statusBarColor = ContextCompat.getColor(applicationContext, R.color.dark_900)
+        window.navigationBarColor = ContextCompat.getColor(applicationContext, R.color.dark_900)
+
 
         getReceiverData()
         initializeToolBar()
@@ -203,11 +203,18 @@ class MessagesActivity : AppCompatActivity() {
         val toolbar = binding.tbMessages
         setSupportActionBar(toolbar)
 
+
         supportActionBar?.apply {
+            title = ""
+
+            if (userReceiver != null && userReceiver!!.avatar.isNotEmpty()) {
+                Picasso.get().load(userReceiver!!.avatar).into(binding.imgMessage)
+            }
+
+            binding.textNameMessage.text = userReceiver?.name
             setDisplayHomeAsUpEnabled(true)
         }
 
-        binding.textNameMessage.text = userReceiver?.name
     }
 
     override fun onDestroy() {

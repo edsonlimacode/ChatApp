@@ -23,7 +23,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/avatar01"
+        android:src="@drawable/profile_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,26 +39,25 @@
         app:backgroundTint="@color/green_500"
         app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
         app:layout_constraintEnd_toEndOf="@+id/imgProfile"
-        app:srcCompat="@drawable/ic_profile_camera" />
+        app:srcCompat="@drawable/ic_gallery_select_photo_24" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
         android:id="@+id/textInputNameProfile"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
+        android:hint="Nome"
+        android:textColor="@color/white"
+        android:textColorHint="@color/gray_600"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/input_rounded_corner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgProfile">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textEditNameProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/input_rounded_corner" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnUpdateProfile"

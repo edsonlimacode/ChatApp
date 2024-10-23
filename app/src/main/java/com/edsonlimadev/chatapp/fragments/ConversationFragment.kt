@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,22 +56,21 @@ class ConversationFragment : Fragment() {
             false
         )
 
-        conversationAdapter = ConversationAdapter{ conversation ->
+        conversationAdapter = ConversationAdapter{ conversation, avatar ->
+                val intent = Intent(context, MessagesActivity::class.java)
 
-            val intent = Intent(context, MessagesActivity::class.java)
+                val user = User(
+                    conversation.userReceiverId,
+                    conversation.receiverName,
+                    "",
+                    avatar.toString()
+                )
 
-            val user = User(
-                conversation.userReceiverId,
-                conversation.receiverName,
-                "",
-                conversation.avatarReceiver
-            )
+                intent.putExtra("userReceiver", user)
 
-            intent.putExtra("userReceiver", user)
-
-            startActivity(intent)
-        }
-
+                startActivity(intent)
+            }
+        
         binding.rvConversations.adapter = conversationAdapter
         binding.rvConversations.layoutManager = LinearLayoutManager(context)
 
@@ -89,7 +91,7 @@ class ConversationFragment : Fragment() {
         val userId = auth.currentUser?.uid
 
         if (userId != null) {
-
+            binding.pbConversation.isVisible = true
             snapshotListener = db.collection(Constants.CONVERSATIONS_COLLECTION)
                 .document(userId)
                 .collection(Constants.LAST_MESSAGE_COLLECTION)
@@ -111,6 +113,7 @@ class ConversationFragment : Fragment() {
                     if (conversations.isNotEmpty()) {
                         conversationAdapter.setConversations(conversations)
                     }
+                    binding.pbConversation.isVisible = false
                 }
         }
     }

@@ -4,16 +4,25 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.edsonlimadev.chatapp.constants.Constants
 import com.edsonlimadev.chatapp.databinding.ItemConversationBinding
 import com.edsonlimadev.chatapp.model.Conversation
 import com.edsonlimadev.chatapp.model.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 
 class ConversationAdapter(
-    private val onClick: (Conversation) -> Unit
+    private val onClick: (Conversation, String?) -> Unit
 ) : Adapter<ConversationAdapter.ConversationViewHolder>() {
 
+    private val db by lazy {
+        FirebaseFirestore.getInstance()
+    }
+
     private var conversationList = emptyList<Conversation>()
+
+    private var avatar: String = ""
 
     fun setConversations(list: List<Conversation>) {
         conversationList = list
@@ -32,12 +41,23 @@ class ConversationAdapter(
                 Picasso.get().load(conversation.avatarReceiver).into(binding.imgConversation)
             }
 
+            db.collection(Constants.USERS_COLLECTION)
+                .document(conversation.userReceiverId)
+                .addSnapshotListener { documentSnapshot, _ ->
+                    val user = documentSnapshot?.toObject(User::class.java)
+                    if (user != null && user.avatar.isNotEmpty()) {
+                        avatar = user.avatar
+                        Picasso.get().load(user.avatar).into(binding.imgConversation)
+                    }
+                }
+
             binding.textNameConversation.text = conversation.receiverName
             binding.textLastMessage.text = conversation.message
 
             binding.clConversation.setOnClickListener {
-                onClick(conversation)
+                onClick(conversation, avatar)
             }
+
         }
 
     }

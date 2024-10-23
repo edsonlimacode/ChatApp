@@ -6,13 +6,14 @@
     android:layout_height="wrap_content"
     android:paddingBottom="10dp">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgConversation"
+        app:shapeAppearanceOverlay="@style/RoundedImageCorner"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/avatar02"
+        android:src="@drawable/profile_avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

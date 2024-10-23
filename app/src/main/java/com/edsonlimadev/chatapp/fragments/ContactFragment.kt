@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -82,6 +83,9 @@ class ContactFragment : Fragment() {
 
         if (userLogged != null) {
 
+
+            binding.pbContact.isVisible = true
+
             listenerRegistration = db.collection(Constants.USERS_COLLECTION)
                 .addSnapshotListener { querySnapshot, _ ->
 
@@ -98,9 +102,11 @@ class ContactFragment : Fragment() {
                         }
                     }
 
+
                     if (users.isNotEmpty()) {
                         contactAdapter.setContacts(users)
                     }
+                    binding.pbContact.isVisible = false
                 }
         }
     }

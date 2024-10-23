@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.edsonlimadev.chatapp.databinding.ActivityLoginBinding
@@ -39,6 +40,9 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
+        window.statusBarColor = ContextCompat.getColor(this, R.color.dark_900)
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.dark_900)
+
         binding.btnSingIn.setOnClickListener {
 
             email = binding.textEditEmailSignIn.text.toString()
@@ -72,21 +76,21 @@ class LoginActivity : AppCompatActivity() {
     private fun validate(): Boolean {
 
         if(email.isEmpty()){
-            binding.textInputEmailSignIn.error = "E-mail é obrigatório"
+            binding.textEditEmailSignIn.error = "E-mail é obrigatório"
             return false
         }else if(email.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            binding.textInputEmailSignIn.error = "E-mail não é válido"
+            binding.textEditEmailSignIn.error = "E-mail não é válido"
             return false
         }else if (password.isEmpty()){
-            binding.textInputEmailSignIn.error = null
-            binding.textInputPasswordSignIn.error = "Senha é obrigatória"
+            binding.textEditEmailSignIn.error = null
+            binding.textEditPasswordSignIn.error = "Senha é obrigatória"
             return false
         }else if(password.isNotEmpty() && password.length < 6){
-            binding.textInputEmailSignIn.error = null
-            binding.textInputPasswordSignIn.error = "Senha deve conter no minimo 6 caracteres"
+            binding.textEditEmailSignIn.error = null
+            binding.textEditPasswordSignIn.error = "Senha deve conter no minimo 6 caracteres"
             return false
         }else {
-            binding.textInputPasswordSignIn.error = null
+            binding.textEditPasswordSignIn.error = null
             return true
         }
 

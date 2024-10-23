@@ -31,7 +31,6 @@ class ContactAdapter(
 
             binding.textContact.text = user.name
 
-
             binding.clItemContact.setOnClickListener {
                 onClick(user)
             }

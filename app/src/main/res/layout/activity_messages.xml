@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/wp"
     tools:context=".MessagesActivity">
 
@@ -22,12 +29,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIconTint="@color/green_500" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgMessage"
+        app:shapeAppearanceOverlay="@style/RoundedImageCorner"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="60dp"
-        android:src="@drawable/avatar02"
+        android:src="@drawable/profile_avatar"
         app:layout_constraintBottom_toBottomOf="@+id/tbMessages"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tbMessages" />
@@ -55,29 +63,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputMessage"
+    <EditText
+        android:id="@+id/textEditMessage"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:textSize="16sp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/input_rounded_corner"
+        android:hint="Digite a mensagem"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:textColorHint="@color/gray_600"
-        app:hintTextColor="#fff"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fabSendMessage"
         app:layout_constraintStart_toStartOf="parent"
         app:placeholderText="Digite sua mensagem"
-        app:placeholderTextColor="@color/gray_600">
+        app:placeholderTextColor="@color/gray_600" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textEditMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/input_rounded_corner"
-            android:textColor="#FFFFFF"
-            android:textColorHint="@color/gray_600" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMessages"
@@ -86,7 +91,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputMessage"
+        app:layout_constraintBottom_toTopOf="@+id/textEditMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,3 +99,5 @@
         tools:listitem="@layout/item_sender_messages" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
